@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import WeatherDetails from '../components/WeatherDetails';
@@ -13,21 +13,24 @@ const Home: React.FC = () => {
 
   const styles = {
     themeColor: {
-      backgroundColor: theme.palette.background.default,
-      color: theme.palette.text.primary,
-      minHeight: '100vh', // Adjust as needed for full page height
+      backgroundColor: '#1E2A38', // Dark Blue Background
+      color: '#FFFFFF', // White Text
+      minHeight: '100vh',
     },
     mainGrid: {
       padding: '30px 20px 20px 30px',
     },
+    sidebar: {
+      backgroundColor: '#1E2A38', // Ensure Sidebar has the same dark background
+    },
   };
 
   return (
-    <Grid container>
-      <Grid item xs={2}>
+    <Grid container sx={styles.themeColor}>
+      <Grid item xs={2} sx={styles.sidebar}>
         <Sidebar />
       </Grid>
-      <Grid item xs={10} sx={styles.themeColor}>
+      <Grid item xs={10}>
         <Header />
         <Grid container spacing={2} sx={styles.mainGrid}>
           <Grid item xs={12}>

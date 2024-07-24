@@ -1,7 +1,10 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const TodayForecast: React.FC = () => {
+  const theme = useTheme();
+  
   const hourlyData = [
     { time: '6:00 AM', temp: '25°', icon: '🌥' },
     { time: '9:00 AM', temp: '28°', icon: '🌤' },
@@ -11,18 +14,42 @@ const TodayForecast: React.FC = () => {
     { time: '9:00 PM', temp: '30°', icon: '🌥' },
   ];
 
+  const styles = {
+    container: {
+      padding: '20px',
+      backgroundColor: '#1E2A38', // Dark Blue Background
+      color: '#FFFFFF', // White Text
+      borderRadius: '10px',
+    },
+    title: {
+      borderBottom: `2px solid ${theme.palette.primary.main}`,
+      paddingBottom: '10px',
+      marginBottom: '20px',
+    },
+    forecastItem: {
+      textAlign: 'center',
+    },
+    time: {
+      color: '#BCC5D3', // Light Gray for time
+    },
+    temp: {
+      fontSize: '1.2rem',
+      fontWeight: 'bold',
+    },
+  };
+
   return (
-    <Box>
-      <Typography variant="h5">Today's Forecast</Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
+    <Box sx={styles.container}>
+      <Typography variant="h5" sx={styles.title}>Today's Forecast</Typography>
+      <Grid container spacing={2}>
         {hourlyData.map((data, index) => (
-          <Box key={index} sx={{ textAlign: 'center' }}>
-            <Typography variant="body2">{data.time}</Typography>
+          <Grid item xs={12} sm={4} md={2} key={index} sx={styles.forecastItem}>
+            <Typography variant="body2" sx={styles.time}>{data.time}</Typography>
             <Typography variant="h6">{data.icon}</Typography>
-            <Typography variant="body1">{data.temp}</Typography>
-          </Box>
+            <Typography sx={styles.temp}>{data.temp}</Typography>
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </Box>
   );
 };
