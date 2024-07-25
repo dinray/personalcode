@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Box } from '@mui/material';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
@@ -9,8 +9,25 @@ import Footer from '../components/Footer';
 import { useTheme } from '@mui/material/styles';
 
 const Home: React.FC = () => {
+  const [weatherData, setWeatherData] = useState();
   const theme = useTheme();
+  const getWeatherApi = async (city: string) => {
+    try{
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3232c166ecbe3eab6cef2124ba286e33`
+    console.log('url=',url)
+    const response = await fetch(url);
+    const result = await response.json();
+    setWeatherData(result)
+    }
+    catch(error){
 
+    }
+  }
+
+  useEffect(() => {
+    getWeatherApi('Delhi')
+  }, [])
+  console.log('weatherData=',weatherData)
   const styles = {
     themeColor: {
       backgroundColor: '#1E2A38', // Dark Blue Background
