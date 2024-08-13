@@ -10,8 +10,25 @@ import CloudOffIcon from '@mui/icons-material/CloudOff';
 import CloudCircleIcon from '@mui/icons-material/CloudCircle';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import WavesIcon from '@mui/icons-material/Waves';
+//import { WeatherData } from '../pages/Home';
 
-const WeatherDetails: React.FC = () => {
+interface WeatherDetailsProps {
+  dataLocation: string | undefined;
+  temperature: number | undefined;
+  windSpeed: number | undefined;
+  realFeel: number | undefined;
+  weatherDescription: string | undefined;
+  cloudiness: number | undefined;
+}
+
+const WeatherDetails: React.FC<WeatherDetailsProps> = ({
+  dataLocation,
+  temperature,
+  windSpeed,
+  realFeel,
+  weatherDescription,
+  cloudiness,
+}) => {
   const styles = {
     container: {
       padding: '20px',
@@ -53,15 +70,15 @@ const WeatherDetails: React.FC = () => {
 
   return (
     <Box sx={styles.container}>
-      <Typography variant="h3">Madrid</Typography>
+      <Typography variant="h3">{dataLocation?dataLocation:""}</Typography>
       <Typography variant="h5" sx={styles.subtitle}>Chance of rain: 0%</Typography>
-      <Typography sx={styles.mainTemp}>31°</Typography>
+      <Typography sx={styles.mainTemp}>{temperature?temperature+'°':"32"+'°'}</Typography>
       <Grid container spacing={2} sx={{ mt: 2 }}>
         <Grid item xs={12} md={3}>
           <Box sx={styles.detailBox}>
             <WbSunnyIcon sx={styles.icon} />
             <Typography variant="h6" sx={styles.detailTitle}>Real Feel</Typography>
-            <Typography sx={styles.detailValue}>30°</Typography>
+            <Typography sx={styles.detailValue}>{realFeel?realFeel+'°':"30"+'°'}</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={3}>
@@ -75,7 +92,7 @@ const WeatherDetails: React.FC = () => {
           <Box sx={styles.detailBox}>
             <AirIcon sx={styles.icon} />
             <Typography variant="h6" sx={styles.detailTitle}>Wind</Typography>
-            <Typography sx={styles.detailValue}>0.2 km/h</Typography>
+            <Typography sx={styles.detailValue}>{windSpeed} km/h</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={3}>
